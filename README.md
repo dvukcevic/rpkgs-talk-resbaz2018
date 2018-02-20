@@ -19,6 +19,9 @@ dependencies.
 [mypackage]: https://github.com/dvukcevic/mypackage
 [slidify]: https://github.com/ramnathv/slidify
 
+Example solutions to the challenge problems (which are presented on the final
+slide) are included in this repo in the `challenge-solutions` directory.
+
 This talk is based on a previous, longer and more detailed talk given by Damjan
 Vukcevic, which is also available via GitHub: [rpkgs-talk][rpkgs-talk]
 
