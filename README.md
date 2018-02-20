@@ -9,11 +9,6 @@ Melbourne.
 The slides from the talk are hosted at:
 <https://dvukcevic.github.io/rpkgs-talk-resbaz2018/>
 
-This talk is based on a previous, longer and more detailed talk given by Damjan
-Vukcevic, which is also available via GitHub: [rpkgs-talk][rpkgs-talk]
-
-[rpkgs-talk]: https://github.com/dvukcevic/rpkgs-talk
-
 The example R package shown in the talk is available from GitHub:
 [mypackage][mypackage].
 
@@ -23,6 +18,11 @@ dependencies.
 
 [mypackage]: https://github.com/dvukcevic/mypackage
 [slidify]: https://github.com/ramnathv/slidify
+
+This talk is based on a previous, longer and more detailed talk given by Damjan
+Vukcevic, which is also available via GitHub: [rpkgs-talk][rpkgs-talk]
+
+[rpkgs-talk]: https://github.com/dvukcevic/rpkgs-talk
 
 
 ## Acknowledgements
