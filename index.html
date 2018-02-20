@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Your first R package</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Your first R package">
+  <meta name="author" content="Damjan Vukcevic">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/monokai.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/damjan.css"></link>
+<link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <aside class="gdbar">
+    <img src="assets/img/Rlogo_scaled.png">
+  </aside>
+  <hgroup class="auto-fadein">
+    <h1>Your first R package</h1>
+    <h2>21 Feb 2018, Research Bazaar, University of Melbourne</h2>
+    <p>Damjan Vukcevic<br/>Lecturer in Statistical Genomics</p>
+  </hgroup>
+    <a href="https://github.com/dvukcevic/rpkgs-talk-resbaz2018/zipball/gh-pages" class="example">
+     Download
+    </a>
+  <article></article>  
+  <footer class = 'license'>
+    <a href='https://creativecommons.org/licenses/by-sa/4.0/'>
+    <img width = '80px' src = 'https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by-sa.png'>
+    </a>
+  </footer>
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Why R packages?</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Makes your code:</p>
+
+<ul>
+<li><p>Easier to manage</p></li>
+<li><p>Easier to reuse</p></li>
+<li><p>Easier to share</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-2" style="background:;">
+  <hgroup>
+    <h2>Overview</h2>
+  </hgroup>
+  <article data-timings="">
+    <ol>
+<li><p>What is an R package?</p></li>
+<li><p>Your first R package</p></li>
+<li><p>Developing R packages using RStudio</p></li>
+</ol>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>What is an R package?</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>&quot;Packages are the fundamental units of reproducible R code.&quot; (Hadley Wickham)</p>
+
+<p>&quot;R packages are the best way to distribute R code and documentation…&quot; (Karl
+Broman)</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-4" style="background:;">
+  <hgroup>
+    <h2>R functions (refresher)</h2>
+  </hgroup>
+  <article data-timings="">
+    <p><strong>Functions</strong> are an even more &#39;fundamental unit&#39; than packages</p>
+
+<p>The simplest way to &#39;package up&#39; some R code</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-5" style="background:;">
+  <hgroup>
+    <h2>Example</h2>
+  </hgroup>
+  <article data-timings="">
+    <p class='tight'>Define a function:</p>
+
+<pre><code class="r"># Calculate the square of x.
+square &lt;- function(x)
+    x^2
+</code></pre>
+
+<p class='tight'>Use the function:</p>
+
+<pre><code class="r">square(1:3)
+</code></pre>
+
+<pre><code>## [1] 1 4 9
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-6" style="background:;">
+  <hgroup>
+    <h2>An R package is…</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>…a standard way to &#39;package up&#39; R functions together</p>
+
+<p>R code ➔ functions ➔ packages</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-7" style="background:;">
+  <hgroup>
+    <h2><code>functions.R</code>, the poor man&#39;s R package</h2>
+  </hgroup>
+  <article data-timings="">
+    <ol>
+<li><p>Place function definitions in a file called <code>functions.R</code></p></li>
+<li><p>Load this in other scripts using <code>source(&quot;function.R&quot;)</code></p></li>
+</ol>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-8" style="background:;">
+  <hgroup>
+    <h2>Examples</h2>
+  </hgroup>
+  <article data-timings="">
+    <p class='tight'>In <code>functions.R</code>:</p>
+
+<pre><code># Calculate the square of x.
+square &lt;- function(x)
+    x^2
+</code></pre>
+
+<p class='tight'>In your R session:</p>
+
+<pre><code class="r">source(&quot;functions.R&quot;)
+square(1:3)
+</code></pre>
+
+<pre><code>## [1] 1 4 9
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-9" style="background:;">
+  <hgroup>
+    <h2>Examples</h2>
+  </hgroup>
+  <article data-timings="">
+    <p class='tight'>In <code>functions.R</code>:</p>
+
+<pre><code class="r"># Resample values from a given vector.
+resample &lt;- function(x, ...)
+    x[sample.int(length(x), ...)]
+</code></pre>
+
+<p class='tight'>In your R session:</p>
+
+<pre><code class="r">source(&quot;functions.R&quot;)
+resample(letters[1:10])
+</code></pre>
+
+<pre><code>##  [1] &quot;c&quot; &quot;h&quot; &quot;d&quot; &quot;a&quot; &quot;i&quot; &quot;e&quot; &quot;g&quot; &quot;j&quot; &quot;f&quot; &quot;b&quot;
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-10" style="background:;">
+  <hgroup>
+    <h2>Note: only need to <code>source()</code> once</h2>
+  </hgroup>
+  <article data-timings="">
+    <p class='tight'>In your R session:</p>
+
+<pre><code class="r">source(&quot;functions.R&quot;)
+square(1:3)
+</code></pre>
+
+<pre><code>## [1] 1 4 9
+</code></pre>
+
+<pre><code class="r">resample(letters[1:10])
+</code></pre>
+
+<pre><code>##  [1] &quot;d&quot; &quot;i&quot; &quot;c&quot; &quot;e&quot; &quot;f&quot; &quot;g&quot; &quot;h&quot; &quot;a&quot; &quot;j&quot; &quot;b&quot;
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="segue quote" id="slide-11" style="background:;">
+  <article data-timings="">
+    <p>Hilary Parker:</p>
+
+<p><q>I really should just make an R package with these functions so I don&#39;t have
+to keep copy/pasting them like a goddamn luddite.</q></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-12" style="background:;">
+  <hgroup>
+    <h2>Your first R package</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Create folder structure</p>
+
+<pre><code>mypackage/
+└── R/
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-13" style="background:;">
+  <hgroup>
+    <h2>Your first R package</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Move <code>functions.R</code> into the <code>R</code> subfolder</p>
+
+<pre><code>mypackage/
+└── R/
+    └── functions.R
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-14" style="background:;">
+  <hgroup>
+    <h2>Your first R package</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Create the <code>DESCRIPTION</code> and <code>NAMESPACE</code> files</p>
+
+<pre><code>mypackage/
+├── R/
+│   └── functions.R
+├── DESCRIPTION
+└── NAMESPACE
+</code></pre>
+
+<p>&nbsp;</p>
+
+<p>Note: RStudio will automatically create these files</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-15" style="background:;">
+  <hgroup>
+    <h2>Your first R package</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Your <code>DESCRIPTION</code> file should look similar to:</p>
+
+<pre><code>Package: mypackage
+Title: This is my first R package
+Description: This package was created as a way to learn how to write
+    R packages.
+Authors@R: person(&quot;Damjan&quot;, &quot;Vukcevic&quot;, email = &quot;damjan@vukcevic.net&quot;,
+                  role = c(&quot;aut&quot;, &quot;cre&quot;))
+Version: 0.1
+Depends: R (&gt;= 3.3.1)
+License: GPL-3
+LazyData: true
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-16" style="background:;">
+  <hgroup>
+    <h2>Your first R package</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Your <code>NAMESPACE</code> file should look like:</p>
+
+<pre><code># Export all names
+exportPattern(&quot;^[[:alpha:]]+&quot;)
+</code></pre>
+
+<p>&nbsp;<br>
+&nbsp;<br>
+&nbsp;<br>
+&nbsp;</p>
+
+<p>Now, let&#39;s do all of this in RStudio…</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-17" style="background:;">
+  <hgroup>
+    <h2>RStudio: Starting a new package</h2>
+  </hgroup>
+  <article data-timings="">
+    <ol>
+<li><p>File &gt; New Project… &gt; New Directory &gt; R Package &gt; (dialog box) &gt;
+Create Project</p>
+
+<p><img src="rstudio.new.package.png" alt="Screenshot of RStudio dialog box"></p></li>
+<li><p>Edit the <code>DESCRIPTION</code> file</p></li>
+<li><p>Edit your code</p></li>
+</ol>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-18" style="background:;">
+  <hgroup>
+    <h2>RStudio: Working on your package</h2>
+  </hgroup>
+  <article data-timings="">
+    <ol>
+<li>Edit your code</li>
+<li>Build &gt; Build and Reload<br>
+(<strong>Ctrl/Cmd + Shift + B</strong>)</li>
+<li>Try running your functions in the <strong>Console</strong></li>
+<li>Repeat until happy</li>
+</ol>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-19" style="background:;">
+  <hgroup>
+    <h2>Using your package</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Simply use <code>library(mypackage)</code> instead of <code>source(&quot;functions.R&quot;)</code></p>
+
+<p class='tight'>For example:</p>
+
+<pre><code class="r">library(mypackage)
+square(1:3)
+</code></pre>
+
+<pre><code>## [1] 1 4 9
+</code></pre>
+
+<pre><code class="r">resample(letters[1:10])
+</code></pre>
+
+<pre><code>##  [1] &quot;f&quot; &quot;b&quot; &quot;a&quot; &quot;c&quot; &quot;e&quot; &quot;g&quot; &quot;i&quot; &quot;h&quot; &quot;d&quot; &quot;j&quot;
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-20" style="background:;">
+  <hgroup>
+    <h2>Tip for larger packages</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>You can split up your code into any number of <code>.R</code> files</p>
+
+<pre><code>mypackage/
+├── R/
+│   ├── resample.R
+│   └── square.R
+├── DESCRIPTION
+└── NAMESPACE
+</code></pre>
+
+<p class='tight'>All <code>.R</code> files within the <code>R</code> subfolder will automatically be included
+in your package</p>
+
+<p>(More convenient than if <code>source()</code>-ing)</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-21" style="background:;">
+  <hgroup>
+    <h2>Benefits of packages (vs <code>functions.R</code>)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Easier to reuse</li>
+<li>Easier to share</li>
+<li>Easier to maintain as complexity increases</li>
+<li>Cleaner project code</li>
+</ul>
+
+<p>&nbsp;</p>
+
+<p>And also (not covered today):</p>
+
+<ul>
+<li>Better documentation</li>
+<li>Easier automated testing</li>
+<li>Dependency and namespace management</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-22" style="background:;">
+  <hgroup>
+    <h2>More info</h2>
+  </hgroup>
+  <article data-timings="">
+    <h3>Slides for this talk</h3>
+
+<p><a href="https://dvukcevic.github.io/rpkgs-talk-resbaz2018/">https://dvukcevic.github.io/rpkgs-talk-resbaz2018/</a></p>
+
+<h3>More advanced guide for writing R packages</h3>
+
+<p><a href="https://dvukcevic.github.io/rpkgs-talk/">https://dvukcevic.github.io/rpkgs-talk/</a></p>
+
+<h3>Contact me</h3>
+
+<p><strong>Web</strong> - <a href="http://damjan.vukcevic.net/">http://damjan.vukcevic.net/</a></p>
+
+<p><strong>Email</strong> - <a href="mailto:damjan@vukcevic.net">damjan@vukcevic.net</a></p>
+
+<p><strong>Twitter</strong> - <a href="https://twitter.com/VukcevicD">@VukcevicD</a></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-23" style="background:;">
+  <hgroup>
+    <h2>Challenge problems</h2>
+  </hgroup>
+  <article data-timings="">
+    <h3>Challenge 1</h3>
+
+<p>Write an R package called <code>challenge1</code> that contains the functions <code>square()</code>
+and <code>cube()</code> which respectively square or cube an input number.</p>
+
+<h3>Challenge 2</h3>
+
+<p>Write an R package called <code>challenge2</code> that contains the functions
+<code>fullname()</code> and <code>sentence()</code> that behave as follows:</p>
+
+<ul>
+<li><p><code>fullname()</code> combines two input strings into a single string, for example:<br>
+<code>fullname(&quot;Damjan&quot;, &quot;Vukcevic&quot;)</code> should return <code>&quot;Damjan Vukcevic&quot;</code>.</p></li>
+<li><p><code>sentence()</code> takes two input strings and returns a sentence, in this form:<br>
+<code>sentence(&quot;Damjan&quot;, &quot;Vukcevic&quot;)</code> should return <code>&quot;The name Damjan Vukcevic
+contains 14 characters&quot;</code>.</p></li>
+</ul>
+
+<p>Hint: use <code>paste()</code> and <code>nchar()</code></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Why R packages?'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='Overview'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='What is an R package?'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='R functions (refresher)'>
+         4
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=5 title='Example'>
+         5
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=6 title='An R package is…'>
+         6
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=7 title='<code>functions.R</code>, the poor man&#39;s R package'>
+         7
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=8 title='Examples'>
+         8
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=9 title='Examples'>
+         9
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=10 title='Note: only need to <code>source()</code> once'>
+         10
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=11 title='NA'>
+         11
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=12 title='Your first R package'>
+         12
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=13 title='Your first R package'>
+         13
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=14 title='Your first R package'>
+         14
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=15 title='Your first R package'>
+         15
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=16 title='Your first R package'>
+         16
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=17 title='RStudio: Starting a new package'>
+         17
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=18 title='RStudio: Working on your package'>
+         18
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=19 title='Using your package'>
+         19
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=20 title='Tip for larger packages'>
+         20
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=21 title='Benefits of packages (vs <code>functions.R</code>)'>
+         21
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=22 title='More info'>
+         22
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=23 title='Challenge problems'>
+         23
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  <script src="./assets/js/jquery-1.7.min.js"></script>
+
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
