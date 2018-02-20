@@ -1,0 +1,11 @@
+Package: challenge2
+Title: Solution to Challenge 2
+Description: This package solves the second challenge problem from the R
+    packages talk given at the Research Bazaar 2018 at the University of
+    Melbourne.
+Authors@R: person("Damjan", "Vukcevic", email = "damjan@vukcevic.net",
+                  role = c("aut", "cre"))
+Version: 1.0
+Depends: R (>= 3.0.0)
+License: GPL-3
+LazyData: true
