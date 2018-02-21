@@ -85,7 +85,7 @@ R code ➔ functions ➔ packages
 
 1. Place function definitions in a file called `functions.R`
 
-2. Load this in other scripts using `source("function.R")`
+2. Load this in other scripts using `source("functions.R")`
 
 ---
 
