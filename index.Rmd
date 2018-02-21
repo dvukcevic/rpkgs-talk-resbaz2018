@@ -11,9 +11,9 @@ widgets     : []
 mode        : selfcontained
 knit        : slidify::knit2slides
 license     : by-sa
-#github      :
-#  user      : dvukcevic
-#  repo      : rpkgs-talk-resbaz2018
+github      :
+  user      : dvukcevic
+  repo      : rpkgs-talk-resbaz2018
 ---
 
 ## Why R packages?
